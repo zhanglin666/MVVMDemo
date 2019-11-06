@@ -15,7 +15,7 @@
         android:id="@+id/pass_word"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="密码" />
+        android:hint="密码" />
 
     <Button
         android:id="@+id/login"

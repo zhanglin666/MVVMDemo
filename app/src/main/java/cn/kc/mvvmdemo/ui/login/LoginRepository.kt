@@ -1,9 +1,7 @@
 package cn.kc.mvvmdemo.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import cn.kc.mvvmdemo.ui.main.ApiCodeException
-import cn.kc.mvvmdemo.ui.main.UserBean
 import cn.kc.mvvmdemo.ui.main.WanResponse
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
@@ -24,8 +22,8 @@ class LoginRepository {
         MutableLiveData<ResultEnum>()
     }
 
-    fun login() {
-        val disposable = wanService.login("245400", "245400")
+    fun login(user:String,password:String) {
+        val disposable = wanService.login(user,password)
             .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.io())
 //            .compose(handlerResult())

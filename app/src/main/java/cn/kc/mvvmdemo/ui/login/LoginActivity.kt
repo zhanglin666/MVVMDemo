@@ -2,6 +2,7 @@ package cn.kc.mvvmdemo.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -18,9 +19,8 @@ import kotlinx.android.synthetic.main.act_login.*
  * 说明：
  */
 class LoginActivity : AppCompatActivity() {
-
     val mLoginViewModel: LoginViewModel by lazy {
-        ViewModelProviders.of(this,object :ViewModelProvider.Factory{
+        ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return LoginViewModel(LoginRepository()) as T
             }
@@ -35,7 +35,15 @@ class LoginActivity : AppCompatActivity() {
 
     fun init() {
         login.setOnClickListener {
-            mLoginViewModel.login()
+            if (TextUtils.isEmpty(user_name.text.toString())) {
+                Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (TextUtils.isEmpty(pass_word.text.toString())) {
+                Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            mLoginViewModel.login(user_name.text.toString(),pass_word.text.toString())
         }
 
         mLoginViewModel.state.observe(this, object : Observer<ResultEnum> {

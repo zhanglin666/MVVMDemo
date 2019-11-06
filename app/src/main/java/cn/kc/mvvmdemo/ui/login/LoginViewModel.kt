@@ -9,7 +9,8 @@ import androidx.lifecycle.ViewModel
  */
 class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
 
-    val state=repository.state
+    val state = repository.state
 
-    fun login() = repository.login()
+    fun login(user:String,password:String) = repository.login(user,password)
+
 }
